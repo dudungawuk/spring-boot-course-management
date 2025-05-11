@@ -12,6 +12,8 @@ This document outlines the API for the University Course Management System. The 
 4. **Student**: Represents a student.
 5. **CourseOffering**: Represents a specific instance of a Course being taught in a semester by a Professor.
 6. **Enrollment**: Represents a Student's enrollment in a specific CourseOffering, including their grade.
+---
+![Screenshot from 2025-05-11 18-34-50](https://github.com/user-attachments/assets/fd6388ae-c9d9-4906-94bb-854beb6d2944)
 
 ---
 
