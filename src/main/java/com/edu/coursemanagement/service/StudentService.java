@@ -5,8 +5,8 @@ import java.util.UUID;
 
 import com.edu.coursemanagement.dto.request.StudentRequest;
 import com.edu.coursemanagement.dto.request.StudentUpdateRequest;
+import com.edu.coursemanagement.dto.response.EnrollmentResponse;
 import com.edu.coursemanagement.dto.response.StudentResponse;
-import com.edu.coursemanagement.entity.Enrollment;
 
 public interface StudentService {
     StudentResponse createStudent(StudentRequest studentRequest);
@@ -14,4 +14,5 @@ public interface StudentService {
     StudentResponse getStudentById(UUID studentId);
     StudentResponse updateStudentById(UUID studentId,StudentUpdateRequest studentUpdateRequest);
     void deleteStudentById(UUID studentId);
+    List<EnrollmentResponse> getAllEnrollmentsByStudentId(UUID studentId);
 } 
