@@ -12,17 +12,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "departments")
 @Getter
 @Setter
-@AllArgsConstructor
-@Builder
+@RequiredArgsConstructor
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -30,8 +28,8 @@ public class Department {
 
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "prof_id",unique = true)
+    @OneToOne(fetch = FetchType.LAZY,optional = true)
+    @JoinColumn(name = "prof_id",unique = true,nullable = true)
     private Professor headOfDepartment;
 
     @OneToMany(mappedBy = "department",fetch = FetchType.LAZY,orphanRemoval = true)

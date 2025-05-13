@@ -7,6 +7,7 @@ import com.edu.coursemanagement.dto.request.ProfessorRequest;
 import com.edu.coursemanagement.dto.request.ProfessorUpdateRequest;
 import com.edu.coursemanagement.dto.response.CourseOfferingResponse;
 import com.edu.coursemanagement.dto.response.ProfessorResponse;
+import com.edu.coursemanagement.entity.Professor;
 
 public interface ProfessorService {
     ProfessorResponse createProfessor(ProfessorRequest professorRequest);
@@ -15,4 +16,7 @@ public interface ProfessorService {
     ProfessorResponse updateProffesorById(UUID professorId,ProfessorUpdateRequest professorRequest);
     void deleteProfessorById(UUID professorId);
     List<CourseOfferingResponse> getCourseOfferingsTaughtByProfessor(UUID professorId);
+
+    Professor getProfessorEntityById(UUID professorId);
+    List<ProfessorResponse> getProfesorsByDepartmentId(UUID departmentId);
 }
