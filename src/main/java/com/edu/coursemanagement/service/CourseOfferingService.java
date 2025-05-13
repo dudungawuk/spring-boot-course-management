@@ -18,4 +18,6 @@ public interface CourseOfferingService {
     void deleteCourseOfferingById(UUID courseOfferingId);
     List<StudentResponse> getAllStudentsByCourseOfferingId(UUID courseOfferingId);
     List<EnrollmentResponse> getAllEnrollmentsByCourseOfferingID(UUID courseOfferingId);
+
+    List<CourseOfferingResponse> getAllCourseOfferingsByProfessorId(UUID professorId);
 }

@@ -13,12 +13,12 @@ import com.edu.coursemanagement.dto.response.ProfessorResponse;
 import com.edu.coursemanagement.entity.Department;
 import com.edu.coursemanagement.entity.Professor;
 import com.edu.coursemanagement.exception.BadRequestException;
-import com.edu.coursemanagement.exception.ResourceNotFoundException;
 import com.edu.coursemanagement.mapper.DepartmentMapper;
 import com.edu.coursemanagement.repository.DepartmentRepository;
 import com.edu.coursemanagement.service.CourseService;
 import com.edu.coursemanagement.service.DepartmentService;
 import com.edu.coursemanagement.service.ProfessorService;
+import com.edu.coursemanagement.util.DepartmentHelper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,17 +26,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository departmentRepository;
+    private final DepartmentMapper departmentMapper;
+    private final DepartmentHelper departmentHelper;
 
     private final ProfessorService professorService;
 
     private final CourseService courseService;
 
-    private final DepartmentMapper departmentMapper;
 
     @Override
     public DepartmentResponse assignHeadOfDepartment(UUID departmentId, UUID professorId) {
         Professor professor = professorService.getProfessorEntityById(professorId);
-        Department department = getDepartmentByIdHelper(departmentId);
+        Department department = departmentHelper.getDepartmentById(departmentId);
         department.setHeadOfDepartment(professor);
         DepartmentResponse departmentResponse = departmentMapper.toResponse(departmentRepository.save(department));
         return departmentResponse;
@@ -55,8 +56,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartment(UUID id) {
-        Department department = getDepartmentByIdHelper(id);
+    public void deleteDepartment(UUID departmentId) {
+        Department department = departmentHelper.getDepartmentById(departmentId);
         if(!department.getCourseOffered().isEmpty() || !department.getProfessors().isEmpty()){
             throw new BadRequestException("Department still has linked professors or courses!");
         }
@@ -70,14 +71,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentResponse getDepartmentById(UUID id) {
-        Department department = getDepartmentByIdHelper(id);
+    public DepartmentResponse getDepartmentById(UUID departmentId) {
+        Department department = departmentHelper.getDepartmentById(departmentId);
         return departmentMapper.toResponse(department);
     }
 
     @Override
-    public DepartmentResponse updateDepartmenById(UUID id, DepartmentRequest departmentRequest) {
-        Department department = getDepartmentByIdHelper(id);
+    public DepartmentResponse updateDepartmenById(UUID departmentId, DepartmentRequest departmentRequest) {
+        Department department =departmentHelper.getDepartmentById(departmentId);
         department.setName(departmentRequest.name());
         return departmentMapper.toResponse(departmentRepository.save(department));
     }
@@ -92,9 +93,5 @@ public class DepartmentServiceImpl implements DepartmentService {
         return courseService.getAllCoursesByDepartmentId(departmentId);
     }
 
-    private Department getDepartmentByIdHelper(UUID id){
-        return departmentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Department not found!"));
-    }
 
 }

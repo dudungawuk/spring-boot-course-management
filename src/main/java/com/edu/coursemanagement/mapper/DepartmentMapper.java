@@ -3,7 +3,6 @@ package com.edu.coursemanagement.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.edu.coursemanagement.dto.request.DepartmentRequest;
 import com.edu.coursemanagement.dto.response.DepartmentResponse;

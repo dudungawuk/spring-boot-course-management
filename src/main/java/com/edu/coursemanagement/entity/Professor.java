@@ -3,6 +3,7 @@ package com.edu.coursemanagement.entity;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +31,7 @@ public class Professor {
 
     private String lastName;
 
+    @Column(unique = true)
     private String  email;
     
     private String officeNumber;

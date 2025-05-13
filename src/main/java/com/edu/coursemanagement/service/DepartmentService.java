@@ -17,4 +17,5 @@ public interface DepartmentService {
     DepartmentResponse assignHeadOfDepartment(UUID departmentId,UUID professorId);
     List<ProfessorResponse> getAllProfessorsByDepartmentId(UUID departmentId);
     List<CourseResponse> getCourseResponsesByDepartmentId(UUID departmentId);
+
 }
