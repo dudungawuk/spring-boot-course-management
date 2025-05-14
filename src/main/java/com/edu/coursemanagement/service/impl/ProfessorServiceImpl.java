@@ -41,7 +41,8 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public void deleteProfessorById(UUID professorId) {
         Professor professor = getProfessorEntityById(professorId);
-        if(!professor.getCourseTaught().isEmpty() || professor.getDepartment().getHeadOfDepartment().equals(professor)){
+        if (!professor.getCourseTaught().isEmpty()
+                || professor.getDepartment().getHeadOfDepartment().equals(professor)) {
             throw new BadRequestException("Professor still has linked courses or is head of department!");
         }
         professorRepository.delete(professor);
@@ -49,7 +50,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public List<ProfessorResponse> getAllProfessors(UUID departmentId) {
-        if(departmentId==null){
+        if (departmentId == null) {
             return professorMapper.toListResponses(professorRepository.findAll());
         }
         return getProfesorsByDepartmentId(departmentId);
@@ -62,28 +63,32 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public ProfessorResponse getProfessorById(UUID professorId) {
-        Professor professor = professorRepository.findById(professorId).orElseThrow(()->new ResourceNotFoundException("Professor not found"));
+        Professor professor = professorRepository.findById(professorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Professor not found"));
         return professorMapper.toResponse(professor);
     }
 
     @Override
     public ProfessorResponse updateProffesorById(UUID professorId, ProfessorUpdateRequest professorRequest) {
         Professor professor = getProfessorEntityById(professorId);
-        professorMapper.updateProfessorFromRequest(professorRequest,professor);
-        Department department = departmentHelper.getDepartmentById(professorRequest.departementId());
+        professorMapper.updateProfessorFromRequest(professorRequest, professor);
+        UUID departmentId = professorRequest.departmentId() == null ? professor.getDepartment().getId()
+                : professorRequest.departmentId();
+        Department department = departmentHelper.getDepartmentById(departmentId);
         professor.setDepartment(department);
         return professorMapper.toResponse(professorRepository.save(professor));
     }
-    
+
     @Override
-    public Professor getProfessorEntityById(UUID professorId){
-        return professorRepository.findById(professorId).orElseThrow(()->new ResourceNotFoundException("Professor not found"));
+    public Professor getProfessorEntityById(UUID professorId) {
+        return professorRepository.findById(professorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Professor not found"));
     }
 
     @Override
     public List<ProfessorResponse> getProfesorsByDepartmentId(UUID departmentId) {
         List<Professor> professors = professorRepository.findAllByDepartmentId(departmentId);
-        if(professors.isEmpty()||professors==null){
+        if (professors.isEmpty() || professors == null) {
             throw new ResourceNotFoundException("Data empty or wrong department id");
         }
         return professorMapper.toListResponses(professors);

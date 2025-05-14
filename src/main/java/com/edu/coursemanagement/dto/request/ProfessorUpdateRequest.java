@@ -5,5 +5,5 @@ import java.util.UUID;
 public record ProfessorUpdateRequest(
     String email,
     String officeNumber,
-    UUID departementId
+    UUID departmentId
     ) {}

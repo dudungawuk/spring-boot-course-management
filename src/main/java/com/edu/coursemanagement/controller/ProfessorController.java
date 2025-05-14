@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.edu.coursemanagement.dto.request.ProfessorRequest;
 import com.edu.coursemanagement.dto.request.ProfessorUpdateRequest;
 import com.edu.coursemanagement.dto.response.CourseOfferingResponse;
-import com.edu.coursemanagement.dto.response.DepartmentResponse;
 import com.edu.coursemanagement.dto.response.ProfessorResponse;
 import com.edu.coursemanagement.payloads.ApiResponse;
 import com.edu.coursemanagement.service.ProfessorService;
@@ -33,16 +32,20 @@ public class ProfessorController {
     private final ProfessorService professorService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ProfessorResponse>> createProfessor(@RequestBody ProfessorRequest professorRequest) {
+    public ResponseEntity<ApiResponse<ProfessorResponse>> createProfessor(
+            @RequestBody ProfessorRequest professorRequest) {
         ProfessorResponse professorResponse = professorService.createProfessor(professorRequest);
-        ApiResponse<ProfessorResponse> response = new ApiResponse<>(HttpStatus.CREATED.value(), "CREATED", professorResponse);
+        ApiResponse<ProfessorResponse> response = new ApiResponse<>(HttpStatus.CREATED.value(), "CREATED",
+                professorResponse);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ProfessorResponse>>> getAllProfessors(@RequestParam(required = false) UUID departmentId) {
+    public ResponseEntity<ApiResponse<List<ProfessorResponse>>> getAllProfessors(
+            @RequestParam(required = false) UUID departmentId) {
         List<ProfessorResponse> professorResponses = professorService.getAllProfessors(departmentId);
-        ApiResponse<List<ProfessorResponse>> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", professorResponses);
+        ApiResponse<List<ProfessorResponse>> response = new ApiResponse<>(HttpStatus.OK.value(), "OK",
+                professorResponses);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -54,7 +57,8 @@ public class ProfessorController {
     }
 
     @PutMapping("{professorId}")
-    public ResponseEntity<ApiResponse<ProfessorResponse>> updateProfessorById(@PathVariable UUID professorId, @RequestBody ProfessorUpdateRequest professorRequest) {
+    public ResponseEntity<ApiResponse<ProfessorResponse>> updateProfessorById(@PathVariable UUID professorId,
+            @RequestBody ProfessorUpdateRequest professorRequest) {
         ProfessorResponse professorResponse = professorService.updateProffesorById(professorId, professorRequest);
         ApiResponse<ProfessorResponse> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", professorResponse);
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -67,10 +71,13 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
     }
 
-    @GetMapping("{professorId}/department")
-    public ResponseEntity<ApiResponse<List<CourseOfferingResponse>>> getProfessorDepartment(@PathVariable UUID professorId) {
-        List<CourseOfferingResponse> courseOfferingResponses = professorService.getCourseOfferingsTaughtByProfessor(professorId);
-        ApiResponse<List<CourseOfferingResponse>> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", courseOfferingResponses);
+    @GetMapping("{professorId}/course-offerings")
+    public ResponseEntity<ApiResponse<List<CourseOfferingResponse>>> getProfessorDepartment(
+            @PathVariable UUID professorId) {
+        List<CourseOfferingResponse> courseOfferingResponses = professorService
+                .getCourseOfferingsTaughtByProfessor(professorId);
+        ApiResponse<List<CourseOfferingResponse>> response = new ApiResponse<>(HttpStatus.OK.value(), "OK",
+                courseOfferingResponses);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

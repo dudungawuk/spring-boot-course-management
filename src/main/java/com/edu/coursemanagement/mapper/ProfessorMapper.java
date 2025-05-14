@@ -20,6 +20,7 @@ public interface ProfessorMapper {
     Professor toEntity(ProfessorRequest professorRequest);
     List<ProfessorResponse> toListResponses(List<Professor> professors);
 
+    @Mapping(target = "id",ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateProfessorFromRequest(ProfessorUpdateRequest professorRequest, @MappingTarget Professor professor);
 }
