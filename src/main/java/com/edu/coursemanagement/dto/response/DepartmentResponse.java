@@ -7,5 +7,5 @@ public record DepartmentResponse(
         String name,
         ProfessorResponse headOfDepartment,
         List<ProfessorResponse> professors,
-        List<CourseOfferingResponse> courseOffered) {
+        List<CourseResponse> courseOffered) {
 }

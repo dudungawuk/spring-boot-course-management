@@ -5,6 +5,6 @@ import java.util.UUID;
 public record CourseRequest(
     String courseCode,
     String title,
-    int creadits
-    ,UUID departmentId
+    int credits,
+    UUID departmentId
     ) {}

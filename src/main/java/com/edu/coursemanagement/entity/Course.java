@@ -32,7 +32,7 @@ public class Course {
     private int credits;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
+    @JoinColumn(name = "department_id")
     private Department department;
 
     @OneToMany(mappedBy = "course")

@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.edu.coursemanagement.entity.Course;
 
 public interface CourseRepository extends JpaRepository<Course,UUID> {
-    @Query("SELECT c FROM Professor c WHERE c.department.id = :departmentId")
+    @Query("SELECT c FROM Course c WHERE c.department.id = :departmentId")
     List<Course> findAllByDepartmentId(UUID departmentId);
 } 

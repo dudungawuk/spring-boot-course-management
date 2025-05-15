@@ -78,7 +78,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentResponse updateDepartmenById(UUID departmentId, DepartmentRequest departmentRequest) {
-        Department department =departmentHelper.getDepartmentById(departmentId);
+        Department department = departmentHelper.getDepartmentById(departmentId);
         department.setName(departmentRequest.name());
         return departmentMapper.toResponse(departmentRepository.save(department));
     }
