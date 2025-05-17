@@ -10,7 +10,7 @@ public record StudentResponse(
     String firstName,
     String lastName,
     String email,
-    LocalDate dayOfBirth,
+    LocalDate dateOfBirth,
     List<Enrollment> enrollments
 ) {
 
