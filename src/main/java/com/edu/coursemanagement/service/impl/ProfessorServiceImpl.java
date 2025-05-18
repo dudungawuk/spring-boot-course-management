@@ -3,6 +3,7 @@ package com.edu.coursemanagement.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.edu.coursemanagement.dto.request.ProfessorRequest;
@@ -28,7 +29,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     private final ProfessorRepository professorRepository;
     private final ProfessorMapper professorMapper;
     private final DepartmentHelper departmentHelper;
-    private final CourseOfferingService courseOfferingService;
+    private final @Lazy CourseOfferingService courseOfferingService;
 
     @Override
     public ProfessorResponse createProfessor(ProfessorRequest professorRequest) {

@@ -6,5 +6,5 @@ public record CourseOfferingFilter(
     UUID courseId,
     UUID professorId,
     String semester,
-    int year) {
+    Integer year) {
 }

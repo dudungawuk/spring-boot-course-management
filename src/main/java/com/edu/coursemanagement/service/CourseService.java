@@ -7,6 +7,7 @@ import com.edu.coursemanagement.dto.request.CourseRequest;
 import com.edu.coursemanagement.dto.request.CourseUpdateRequest;
 import com.edu.coursemanagement.dto.response.CourseOfferingResponse;
 import com.edu.coursemanagement.dto.response.CourseResponse;
+import com.edu.coursemanagement.entity.Course;
 
 public interface CourseService {
     CourseResponse createCourse(CourseRequest courseRequest);
@@ -17,4 +18,6 @@ public interface CourseService {
     List<CourseOfferingResponse> getCourseOfferingByCourseId(UUID courseID);
 
     List<CourseResponse> getAllCoursesByDepartmentId(UUID departmentId);
+
+    Course getCourseEntityById(UUID courseId);
 }

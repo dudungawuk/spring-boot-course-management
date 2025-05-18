@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public record CourseOfferingRequest(
     UUID courseId,
-    UUID proffesorId,
+    UUID professorId,
     String semester,
     int year,
     String location,
