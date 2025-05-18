@@ -13,5 +13,8 @@ import com.edu.coursemanagement.entity.Enrollment;
 public interface EnrollmentRepository extends JpaRepository<Enrollment,UUID> {
     
      @Query("SELECT e FROM Enrollment e WHERE e.student.id = :studentId")
-    List<Enrollment> findAllByStudentId(UUID studentId);   
+    List<Enrollment> findAllByStudentId(UUID studentId); 
+
+    @Query("SELECT e FROM Enrollment e WHERE e.courseOffering.id = :courseOfferingId")
+    List<Enrollment> findAllByCourseOfferingId(UUID courseOfferingId);
 }

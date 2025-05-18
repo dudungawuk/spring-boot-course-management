@@ -23,9 +23,6 @@ public interface ProfessorMapper {
 
     @Named("departmentToDepartmentId")
     default UUID departmentToDepartmentId(Department department){
-        if(department.getId() == null){
-            return null;
-        }
         return department.getId();
     }
 

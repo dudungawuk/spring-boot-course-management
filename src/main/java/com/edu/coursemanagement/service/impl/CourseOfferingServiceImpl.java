@@ -24,6 +24,8 @@ import com.edu.coursemanagement.repository.specification.CourseOfferingSpecifica
 import com.edu.coursemanagement.service.CourseOfferingService;
 import com.edu.coursemanagement.service.CourseService;
 import com.edu.coursemanagement.service.ProfessorService;
+import com.edu.coursemanagement.util.EnrollmentHelper;
+import com.edu.coursemanagement.util.StudentHelper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +38,9 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
 
     private final CourseService courseService;
     private final ProfessorRepository professorRepository;
+
+    private final StudentHelper studentHelper;
+    private final EnrollmentHelper enrollmentHelper;
     @Override
     public CourseOfferingResponse createCourseOffering(CourseOfferingRequest courseOfferingRequest) {
         Course course = courseService.getCourseEntityById(courseOfferingRequest.courseId());
@@ -65,14 +70,12 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
 
     @Override
     public List<EnrollmentResponse> getAllEnrollmentsByCourseOfferingID(UUID courseOfferingId) {
-        // TODO Auto-generated method stub
-        return null;
+        return enrollmentHelper.getEnrollmentsByCourseOfferingId(courseOfferingId);
     }
 
     @Override
     public List<StudentResponse> getAllStudentsByCourseOfferingId(UUID courseOfferingId) {
-        
-        return null;
+        return studentHelper.getStudentByCourseOfferingIdResponse(courseOfferingId);
     }
 
     @Override
