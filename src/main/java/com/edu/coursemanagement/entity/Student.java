@@ -13,14 +13,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "students")
 @Getter
 @Setter
-@AllArgsConstructor
-@Builder
+@RequiredArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -20,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EnrollmentServiceImpl implements EnrollmentService {
 
-    private EnrollmentRepository enrollmentRepository;
-    private EnrollmentMapper enrollmentMapper;
+    private final EnrollmentRepository enrollmentRepository;
+    private final EnrollmentMapper enrollmentMapper;
 
     @Override
     public EnrollmentResponse createEnrollment(EnrollmentRequest enrollmentRequest) {

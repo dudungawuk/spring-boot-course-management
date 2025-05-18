@@ -1,6 +1,5 @@
 package com.edu.coursemanagement.dto.response;
 
-import java.util.List;
 import java.util.UUID;
 
 
