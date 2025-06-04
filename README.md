@@ -427,6 +427,3 @@ Base URL: `/api/enrollments`
 - **Data Transfer Objects (DTOs)**: Use DTOs to tailor request/response payloads, rather than exposing Hibernate entities directly.
 
 ```
-
-This `README.md` provides a solid foundation for understanding the API structure for your University Course Management System. You can now start implementing the Hibernate entities and then, if you choose, build a RESTful service layer (like with Spring Boot and Spring Data JPA/REST) that exposes these kinds of endpoints.
-```
