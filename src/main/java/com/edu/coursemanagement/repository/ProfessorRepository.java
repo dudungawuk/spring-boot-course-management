@@ -5,9 +5,11 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.edu.coursemanagement.entity.Professor;
 
+@Repository
 public interface ProfessorRepository extends JpaRepository<Professor,UUID> {
     @Query("SELECT p FROM Professor p WHERE p.department.id = :departmentId")
     List<Professor> findAllByDepartmentId(UUID departmentId);

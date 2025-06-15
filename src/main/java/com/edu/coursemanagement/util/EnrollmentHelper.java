@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class EnrollmentHelper {
-    private EnrollmentRepository enrollmentRepository;
-    private EnrollmentMapper enrollmentMapper;
+    private final EnrollmentRepository enrollmentRepository;
+    private final EnrollmentMapper enrollmentMapper;
 
     public List<EnrollmentResponse> getEnrollmentsByCourseOfferingId(UUID courseOfferingId) {
         return enrollmentMapper.toListResponses(enrollmentRepository.findAllByCourseOfferingId(courseOfferingId));

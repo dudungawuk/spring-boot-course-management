@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class CourseOfferingHelper {
-    private CourseOfferingRepository courseOfferingRepository;
+    private final CourseOfferingRepository courseOfferingRepository;
 
     public CourseOffering getCourseOfferingEntity(UUID courseOfferingId) {
         return courseOfferingRepository.findById(courseOfferingId).orElseThrow(() -> new ResourceNotFoundException("Course Offering not found"));

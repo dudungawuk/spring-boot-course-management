@@ -23,12 +23,12 @@ public class StudentHelper {
         return studentRepository.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Student not found"));
     }
 
-    public List<Student> getStudentsByCourseOfferingId(UUID courseOfferingId) {
-        return studentRepository.findAllByCourseOfferingId(courseOfferingId);
-    }
+    // public List<Student> getStudentsByCourseOfferingId(UUID courseOfferingId) {
+    //     return studentRepository.findAllByCourseOfferingId(courseOfferingId);
+    // }
 
-    public List<StudentResponse> getStudentByCourseOfferingIdResponse(UUID courseOfferingId) {
-        List<Student> students = getStudentsByCourseOfferingId(courseOfferingId);
-        return studentMapper.toListEntities(students);
-    }
+    // public List<StudentResponse> getStudentByCourseOfferingIdResponse(UUID courseOfferingId) {
+    //     List<Student> students = getStudentsByCourseOfferingId(courseOfferingId);
+    //     return studentMapper.toListEntities(students);
+    // }
 }

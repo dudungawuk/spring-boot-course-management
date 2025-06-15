@@ -36,4 +36,6 @@ public class Student {
     private List<Enrollment> enrollments;
 
     private LocalDate dateOfBirth;
+
+    
 }

@@ -5,7 +5,6 @@ import java.util.UUID;
 
 
 public record EnrollmentRequest(
-     UUID id,
      UUID studentId,
      UUID courseOfferingId
 ) {

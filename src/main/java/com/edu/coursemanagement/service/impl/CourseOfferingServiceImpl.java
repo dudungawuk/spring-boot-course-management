@@ -3,7 +3,6 @@ package com.edu.coursemanagement.service.impl;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,6 @@ import com.edu.coursemanagement.dto.request.CourseOfferingRequest;
 import com.edu.coursemanagement.dto.request.CourseOfferingUpdateRequest;
 import com.edu.coursemanagement.dto.response.CourseOfferingResponse;
 import com.edu.coursemanagement.dto.response.EnrollmentResponse;
-import com.edu.coursemanagement.dto.response.StudentResponse;
 import com.edu.coursemanagement.entity.Course;
 import com.edu.coursemanagement.entity.CourseOffering;
 import com.edu.coursemanagement.entity.Professor;
@@ -23,7 +21,6 @@ import com.edu.coursemanagement.repository.ProfessorRepository;
 import com.edu.coursemanagement.repository.specification.CourseOfferingSpecification;
 import com.edu.coursemanagement.service.CourseOfferingService;
 import com.edu.coursemanagement.service.CourseService;
-import com.edu.coursemanagement.service.ProfessorService;
 import com.edu.coursemanagement.util.EnrollmentHelper;
 import com.edu.coursemanagement.util.StudentHelper;
 
@@ -73,10 +70,10 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
         return enrollmentHelper.getEnrollmentsByCourseOfferingId(courseOfferingId);
     }
 
-    @Override
-    public List<StudentResponse> getAllStudentsByCourseOfferingId(UUID courseOfferingId) {
-        return studentHelper.getStudentByCourseOfferingIdResponse(courseOfferingId);
-    }
+    // @Override
+    // public List<StudentResponse> getAllStudentsByCourseOfferingId(UUID courseOfferingId) {
+    //     return studentHelper.getStudentByCourseOfferingIdResponse(courseOfferingId);
+    // }
 
     @Override
     public CourseOfferingResponse getCourseOfferingById(UUID courseOfferingId) {

@@ -10,30 +10,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edu.coursemanagement.dto.request.EnrollmentFilterRequest;
 import com.edu.coursemanagement.dto.request.EnrollmentRequest;
 import com.edu.coursemanagement.dto.request.EnrollmentUpdateRequest;
 import com.edu.coursemanagement.dto.response.EnrollmentResponse;
-import com.edu.coursemanagement.dto.response.StudentResponse;
 import com.edu.coursemanagement.payloads.ApiResponse;
 import com.edu.coursemanagement.service.EnrollmentService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
-@RequestMapping("/enrollments")
+@RequestMapping("api/enrollments")
 @RequiredArgsConstructor
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<EnrollmentResponse>> createEnrollments(EnrollmentRequest enrollmentRequest) {
+    public ResponseEntity<ApiResponse<EnrollmentResponse>> createEnrollments(@RequestBody EnrollmentRequest enrollmentRequest) {
         EnrollmentResponse enrollmentResponse = enrollmentService.createEnrollment(enrollmentRequest);
         ApiResponse<EnrollmentResponse> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", enrollmentResponse);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<EnrollmentResponse>>> getAllEnrollments(
+        @RequestParam(required = false) UUID studentId, @RequestParam(required = false) UUID courseOfferingId
+    ) {
+        EnrollmentFilterRequest filter = new EnrollmentFilterRequest(studentId, courseOfferingId);
+        List<EnrollmentResponse> enrollmentResponses = enrollmentService.getAllEnrollments(filter);
+        ApiResponse<List<EnrollmentResponse>> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", enrollmentResponses);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    
 
     @GetMapping("{enrollmentId}")
     public ResponseEntity<ApiResponse<EnrollmentResponse>> getEnrollmentById(@PathVariable UUID enrollmentId) {
@@ -43,13 +57,13 @@ public class EnrollmentController {
     }
 
     @PutMapping("{enrollmentId}")
-    public ResponseEntity<ApiResponse<EnrollmentResponse>> updateEnrollmentById(@PathVariable UUID enrollmentId, EnrollmentUpdateRequest enrollmentRequest) {
+    public ResponseEntity<ApiResponse<EnrollmentResponse>> updateEnrollmentById(@PathVariable UUID enrollmentId,@RequestBody EnrollmentUpdateRequest enrollmentRequest) {
         EnrollmentResponse enrollmentResponses = enrollmentService.updateEnrollmentById(enrollmentId, enrollmentRequest);
         ApiResponse<EnrollmentResponse> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", enrollmentResponses);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{enrollmentId}")
     public ResponseEntity<ApiResponse<Void>> deleteEnrollmentById(@PathVariable UUID enrollmentId) {
         enrollmentService.deleteEnrollmentById(enrollmentId);
         ApiResponse<Void> response = new ApiResponse<>(HttpStatus.OK.value(), "OK", null);

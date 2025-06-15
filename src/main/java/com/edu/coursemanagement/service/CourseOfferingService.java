@@ -16,7 +16,7 @@ public interface CourseOfferingService {
     CourseOfferingResponse getCourseOfferingById(UUID courseOfferingId);
     CourseOfferingResponse updateCourseOfferingById(UUID courseOfferingId,CourseOfferingUpdateRequest courseOfferingUpdateRequest);
     void deleteCourseOfferingById(UUID courseOfferingId);
-    List<StudentResponse> getAllStudentsByCourseOfferingId(UUID courseOfferingId);
+    // List<StudentResponse> getAllStudentsByCourseOfferingId(UUID courseOfferingId);
     List<EnrollmentResponse> getAllEnrollmentsByCourseOfferingID(UUID courseOfferingId);
 
     List<CourseOfferingResponse> getAllCourseOfferingsByProfessorId(UUID professorId);
