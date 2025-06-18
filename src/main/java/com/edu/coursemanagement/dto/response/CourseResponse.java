@@ -7,7 +7,8 @@ public record CourseResponse(
         UUID id,
         String courseCode,
         String title,
-        int credits
+        int credits,
+        UUID departmentId
         // DepartmentResponse department,
         // List<CourseOfferingResponse> offerings
         ) {

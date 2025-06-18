@@ -1,0 +1,36 @@
+# Use a standard version for Docker Compose
+version: '3.8'
+
+# Define the services (containers) we want to run
+services:
+
+  # 1. The PostgreSQL Database Service
+  db:
+    image: postgres:15          # Use the official PostgreSQL version 15 image
+    container_name: postgres_db # Give the container a fixed name
+    restart: always             # Always restart the container if it stops
+    environment:
+      - POSTGRES_USER=postgres         # Set the database username
+      - POSTGRES_PASSWORD=postgres # Set the database password
+      - POSTGRES_DB=coursemanagementdb # Create a new database with this name
+    ports:
+      - "5433:5432" # <-- Map laptop port 5433 to container port 5432
+
+  # 2. Your Spring Boot Application Service
+  app:
+    container_name: coursemanagement_app
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    restart: on-failure
+    # This is the magic: it tells this container to wait until the 'db' container is healthy
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"             # Map port 8080 for your app
+    environment:
+      # Override the database URL for Spring Boot to use inside Docker
+      # 'db' is the hostname of our database service defined above!
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/coursemanagementdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update # This will help create tables automatically

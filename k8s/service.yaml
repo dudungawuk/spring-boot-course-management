@@ -1,0 +1,20 @@
+# API version for Services
+apiVersion: v1
+# Type of Kubernetes object
+kind: Service
+# Metadata for the Service
+metadata:
+  name: coursemanagement-service
+spec:
+  # The type ClusterIP means this service is only reachable from INSIDE the cluster.
+  type: ClusterIP
+  # This selector finds the Pods to send traffic to. It must match the Pods' labels.
+  selector:
+    app: coursemanagement
+  # Port configuration
+  ports:
+    - protocol: TCP
+      # The port that the Service itself will be available on.
+      port: 80
+      # The port on the Pod/container that traffic should be sent to (your app's port).
+      targetPort: 8080

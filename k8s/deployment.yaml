@@ -1,0 +1,29 @@
+# API version for Deployments
+apiVersion: apps/v1
+# Type of Kubernetes object
+kind: Deployment
+# Metadata for the Deployment
+metadata:
+  name: coursemanagement-deployment
+spec:
+  # We want 2 running copies of our application
+  replicas: 2
+  # This selector tells the Deployment which Pods to manage
+  selector:
+    matchLabels:
+      app: coursemanagement
+  # This is the template for creating each Pod
+  template:
+    metadata:
+      # The Pods will get this label, matching the selector above
+      labels:
+        app: coursemanagement
+    spec:
+      containers:
+        # Name for the container inside the Pod
+        - name: app
+          # The Docker image to pull and run. This uses the name from your Jenkinsfile.
+          image: muhamadfikrinabil/coursemanagement:latest
+          # The port your Spring Boot app listens on inside the container
+          ports:
+            - containerPort: 8080

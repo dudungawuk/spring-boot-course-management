@@ -1,0 +1,30 @@
+# API version for Ingress
+apiVersion: networking.k8s.io/v1
+# Type of Kubernetes object
+kind: Ingress
+# Metadata for the Ingress
+metadata:
+  name: coursemanagement-ingress
+  # Annotations are used to configure the Ingress controller (e.g., NGINX)
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  # The rules for routing traffic
+  rules:
+    # We will route traffic based on the hostname.
+    # IMPORTANT: 'coursemanagement.example.com' is a placeholder.
+    # In a real setup, you would use your actual domain name here.
+    - host: coursemanagement.example.com
+      http:
+        paths:
+          # Route all traffic for that host
+          - path: /
+            pathType: Prefix
+            backend:
+              # Send the traffic to our Service
+              service:
+                # The name must match the Service we created above
+                name: coursemanagement-service
+                # The port must match the 'port' field in our Service
+                port:
+                  number: 80
